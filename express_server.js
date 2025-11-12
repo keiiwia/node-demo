@@ -20,13 +20,19 @@ server.ws('/', (ws) => {
   ws.send("hello from the server");
 
   setInterval ( () =>{
-    ws.send("hello, there are ${numsofconnections.length} connections"); //tracking information/data
+    for (let ws of numsofconnections){
+      ws.send(`hello, there are ${numsofconnections.length} connections`); //tracking information/data
+    }
   }, 2000) //in milliseconds 
 
   ws.on("close", ()=> {
     console.log("websocket closed");
     numsofconnections = numsofconnections.filter(c => c !== ws);
   })
+
+  ws.on("message", (data) =>{
+    console.log(`message received: ${data}`);
+  });
 }); //give it a path; this one is just a default
 
 

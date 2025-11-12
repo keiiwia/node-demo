@@ -6,7 +6,9 @@
     <title>hi.</title>
     <script>
         let socket = new WebSocket("ws://localhost:3000/");
-        
+        socket.addEventListener("message", (event)=>{
+            console.log(`message received: ${event.data}`);
+        })
 
     </script>
 </head>
